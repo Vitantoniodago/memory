@@ -11,7 +11,7 @@ def main():
     list = []
     # elementi_da_elim = ['(2010)','(2012)']
 
-    for i in range(1,5+1):
+    for i in range(1,170+1):
         url = SCRAPING_URL+str(i)+'/'
         print(f"Richiesta HTTP alla pagina {url}...")
         response = requests.get(url)
