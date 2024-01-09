@@ -1,0 +1,99 @@
+openapi: 3.1.0
+info:
+  title: FastAPI
+  version: 0.1.0
+servers:
+- url: /
+paths:
+  /carica_parola/{parola}:
+    post:
+      description: API per caricare una parola nel dizionario.
+      operationId: carica_parola_carica_parola__parola__post
+      parameters:
+      - explode: false
+        in: path
+        name: parola
+        required: true
+        schema:
+          title: Parola
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Carica Parola
+      x-accepts: application/json
+  /correggi_parola/{parola}:
+    post:
+      operationId: correggi_parola_correggi_parola__parola__post
+      parameters:
+      - explode: false
+        in: path
+        name: parola
+        required: true
+        schema:
+          title: Parola
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Correggi Parola
+      x-accepts: application/json
+  /docs:
+    get:
+      operationId: read_docs_docs_get
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Successful Response
+      summary: Read Docs
+      x-accepts: application/json
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            $ref: '#/components/schemas/ValidationError_loc_inner'
+          type: array
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ValidationError_loc_inner:
+      anyOf:
+      - type: string
+      - type: integer
+
